@@ -12,16 +12,6 @@ def index(request):
     return render(request, 'myapp/index.html', {'documents': documents})
 
 
-def input_url(request):
-    context = {}
-    form = GeeksForm()
-    context['form'] = form
-    if request.POST:
-        temp = request.POST['url_field']
-        print(temp)
-    return render(request, 'myapp/input_url.html', context)
-
-
 def upload(request):
     if request.method == 'POST' and request.FILES.get('testfile'):
         myfile = request.FILES.get('testfile')
@@ -34,7 +24,7 @@ def upload(request):
     return render(request, 'myapp/upload.html')
 
 
-def home_view(request):
+def input_url(request):
     form = GeeksForm(request.POST)
     context = {'form': form}
     if request.POST:
@@ -44,4 +34,5 @@ def home_view(request):
             return render(request, 'myapp/form.html', context)
         url = form.cleaned_data['geeks_field']
         print(url)
-    return render(request, "myapp/form.html", context)
+        context['url'] = url
+    return render(request, "myapp/input_url.html", context)
