@@ -1,0 +1,9 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<form method = "POST">
+    {% csrf_token %}
+    {{ url_field }}
+    <input type = "submit" value = "Submit">
+</form>
+{% endblock %}

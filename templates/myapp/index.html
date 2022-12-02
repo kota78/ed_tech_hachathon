@@ -1,15 +1,25 @@
-<html>
+{% extends 'myapp/base.html' %}
 
-<head>
-    <title>Hello World</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-</head>
 
-<body>
-    <div>
-        <h1><a href="/">Hello World</a></h1>
-    </div>
-</body>
+{% block content %}
 
-</html>
+    <ul>
+        <li><a href="{% url 'upload' %}">upload</a></li>
+    </ul>
+    <ul>
+        <li><a href="{% url 'home_view' %}">input</a></li>
+    </ul>
+
+
+    <p>保存済みのファイル:</p>
+    <ul>
+        {% for obj in documents %}
+        <li>
+            <a href="{{ obj.document.url }}">{{ obj.document.name }}</a>
+            <small>(Uploaded at: {{ obj.uploaded_at }})</small>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock content %}
