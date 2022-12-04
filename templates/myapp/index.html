@@ -1,15 +1,44 @@
-<html>
+{% extends 'myapp/base.html' %}
 
-<head>
-    <title>Hello World</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-</head>
+{% load crispy_forms_tags %}
 
-<body>
-    <div>
-        <h1><a href="/">Hello World</a></h1>
-    </div>
-</body>
+{% block content %}
 
-</html>
+    <ul>
+        <li><a href="{% url 'upload' %}">upload</a></li>
+    </ul>
+    <ul>
+        <li><a href="{% url 'input_url' %}">input</a></li>
+    </ul>
+    <ul>
+        {% for obj in documents %}
+        <li>
+            <a href="{{ obj.document.url }}">{{ obj.document.name }}</a>
+            <small>(Uploaded at: {{ obj.uploaded_at }})</small>
+        </li>
+        {% endfor %}
+        {% for word in keywords %}
+        <li>
+            <a href="">{{ word }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-6">col-8</div>
+        <div class="col-4">
+            <div class="p-3">
+            <form method = "POST">
+                {% comment %} action = "{%url 'top'%}" {% endcomment %}
+                {% csrf_token %}
+                <div>
+                    {{ form|crispy }}
+                </div>
+            </form>
+        </div>
+        <div class="col-1"></div>
+        </div>
+      </div>
+    {% comment %} <iframe width="560" height="315" src="https://drive.google.com/file/d/1cH4T6m_i6VsJyFyUMEF7PnoaFC28WMHC/preview?usp=drivesdk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> {% endcomment %}
+    <a href = "{{url}}">{{url}}</a>
+{% endblock content %}
