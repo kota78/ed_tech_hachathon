@@ -1,14 +1,11 @@
 from django import forms
-from myapp.models import Document
 
 # creating a form
 
 
 class GeeksForm(forms.Form):
-    geeks_field = forms.URLField()
+    geeks_field = forms.URLField(label='', required=False)
 
 
-class DocumentForm(forms.ModelForm):
-    class Meta:
-        model = Document
-        fields = ('description', 'document', )
+class WordForm(forms.Form):
+    word_field = forms.CharField(label='', required=False)

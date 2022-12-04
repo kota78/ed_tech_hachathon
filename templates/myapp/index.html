@@ -1,5 +1,6 @@
 {% extends 'myapp/base.html' %}
 
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -9,9 +10,6 @@
     <ul>
         <li><a href="{% url 'input_url' %}">input</a></li>
     </ul>
-
-
-    <p>保存済みのファイル:</p>
     <ul>
         {% for obj in documents %}
         <li>
@@ -19,6 +17,28 @@
             <small>(Uploaded at: {{ obj.uploaded_at }})</small>
         </li>
         {% endfor %}
+        {% for word in keywords %}
+        <li>
+            <a href="">{{ word }}</a>
+        </li>
+        {% endfor %}
     </ul>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/99goR3uprJg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-6">col-8</div>
+        <div class="col-4">
+            <div class="p-3">
+            <form method = "POST">
+                {% comment %} action = "{%url 'top'%}" {% endcomment %}
+                {% csrf_token %}
+                <div>
+                    {{ form|crispy }}
+                </div>
+            </form>
+        </div>
+        <div class="col-1"></div>
+        </div>
+      </div>
+    {% comment %} <iframe width="560" height="315" src="https://drive.google.com/file/d/1cH4T6m_i6VsJyFyUMEF7PnoaFC28WMHC/preview?usp=drivesdk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> {% endcomment %}
+    <a href = "{{url}}">{{url}}</a>
 {% endblock content %}

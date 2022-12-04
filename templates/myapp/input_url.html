@@ -1,10 +1,19 @@
 {% extends 'myapp/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
-<form method = "POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type = "submit" value = "url"/>
-</form>
+<div class="d-flex justify-content-center align-items-center", style="height:100%;">
+    <div class="col-6">
+        <form method = "POST">
+            {% comment %} action = "{%url 'top'%}" {% endcomment %}
+            {% csrf_token %}
+            <h1 class="d-flex justify-content-center">Input URL</h1>
+            <div>
+                {{ form|crispy }}
+            </div>
+        </form>
+    </div>
+</div>
 <a href = "{{url}}">{{url}}</a>
 {% endblock %}

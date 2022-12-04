@@ -1,9 +1,9 @@
 {% extends 'myapp/base.html' %}
 
 {% block content %}
-<form method = "POST">
+<form method = "post" novalidate>
     {% csrf_token %}
-    {{ form }}
+    {{ form|crispy }}
     <input type = "submit" value = "url"/>
 </form>
 <p>{{url}}</p>
